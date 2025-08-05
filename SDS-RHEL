@@ -1,1 +1,61 @@
-SDS-RHEL
+SDS-RHEL 每一個SDS RHEL 8.8 
+
+sudo systemctl disable firewalld
+sudo systemctl stop firewalld
+sudo systemctl status firewalld
+q
+
+vi /etc/selinux/config
+SELINUX=disabled
+
+vi /etc/yum/pluginconf.d/subscription-manager.conf
+enabled=0
+
+mkdir /media/cdrom
+mount /dev/sr0 /media/cdrom
+df -h
+
+cp -v /media/cdrom/media.repo /etc/yum.repos.d/rhel8.repo
+chmod 644 /etc/yum.repos.d/rhel8.repo
+vi /etc/yum.repos.d/rhel8.repo
+
+name=Red Hat Enterprise Linux 8.8.0
+mediaid=None
+metadata_expire=-1
+gpgcheck=1
+cost=500
+插入以下
+enabled=1
+baseurl=file:///media/cdrom/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+
+name=Red Hat Enterprise Linux 8 - BaseOS
+metadata_expire=-1
+gpgcheck=0
+enabled=1
+baseurl=file:///media/cdrom/BaseOS/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+
+[InstallMedia-AppStream]
+name=Red Hat Enterprise Linux 8 - AppStream
+metadata_expire=-1
+gpgcheck=0
+enabled=1
+baseurl=file:///media/cdrom/AppStream/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+
+安裝以下
+
+sudo yum install net-tools mlocate telnet numactl libaio which bash-completion python3 binutils smartmontools sg3_utils hdparm pciutils sysstat ndctl jq daxio libpmem
+sudo yum install apr
+
+################################
+
+vi /etc/sysctl.conf
+加入以下
+fs.file-max = 32768
+net.ipv4.neigh.default.gc_thresh1 =  8192
+net.ipv4.neigh.default.gc_thresh2 = 16384
+net.ipv4.neigh.default.gc_thresh3 = 32768
+
+sysctl -p
