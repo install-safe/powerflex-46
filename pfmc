@@ -1,2 +1,37 @@
 pfmp-k8s-154L-20240503.ova 佈完之後 登入帳密是delladmin / delladmin
 [pfmp os is SUSE 15 SP2]
+Deploying and configuring the PowerFlex management platform VMs
+Use the following procedure to deploy the PowerFlex management platform cluster VMs.
+Prerequisites
+The PowerFlex management platform cluster requires three VMs to be deployed.
+Steps
+1.
+Log in to the VMware vCSA.
+2.
+Click Menu > Shortcuts > Hosts and Clusters.
+3.
+Right-click the ESXi Host > Select Deploy OVF Template.
+4.
+Select Local File > Upload Files > Browse to the PowerFlex management platform OVA.
+5.
+Click Open > Next.
+6.
+Enter pfmp-mvm-<number> for the VM name.
+7.
+Click Next.
+8.
+Verify that there are no compatibility warnings and click Next.
+9.
+Click Next.
+10.
+Review details and click Next.
+11.
+Select the datastore.
+12.
+Select Virtual disk format > Thin provision > Next.
+13.
+Select Desired Destination Network > OK > Next.
+14.
+Click Finish.
+15.
+Repeat all the steps for the three management VMs.
